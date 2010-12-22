@@ -53,8 +53,8 @@ static const struct button_mapping button_context_standard[]  = {
 
 static const struct button_mapping button_context_wps[]  = {
     { ACTION_WPS_PLAY,     BUTTON_UP|BUTTON_REL,        BUTTON_UP },
-    { ACTION_WPS_STOP,     BUTTON_HOME|BUTTON_REPEAT,   BUTTON_NONE },
-    { ACTION_WPS_MENU,     BUTTON_POWER|BUTTON_REL,     BUTTON_NONE },
+    { ACTION_WPS_STOP,     BUTTON_POWER|BUTTON_REL,     BUTTON_NONE },
+    { ACTION_WPS_MENU,     BUTTON_HOME|BUTTON_REL,      BUTTON_NONE },
 
     { ACTION_WPS_SKIPPREV, BUTTON_LEFT|BUTTON_REL,    BUTTON_LEFT },
     { ACTION_WPS_SEEKBACK, BUTTON_LEFT|BUTTON_REPEAT, BUTTON_NONE },
@@ -81,7 +81,7 @@ static const struct button_mapping button_context_wps[]  = {
     { ACTION_WPS_ID3SCREEN,     BUTTON_SELECT|BUTTON_DOWN,      BUTTON_SELECT },
 
 #ifdef HAVE_HOTKEY /* down|repeat doesn't work in the file browser */
-    { ACTION_WPS_HOTKEY,        BUTTON_HOME|BUTTON_REL,         BUTTON_HOME }, 
+    { ACTION_WPS_HOTKEY,        BUTTON_HOME|BUTTON_REPEAT,      BUTTON_HOME }, 
 #endif
 
     { ACTION_WPS_VIEW_PLAYLIST, BUTTON_DOWN|BUTTON_REL,      BUTTON_NONE }, 
@@ -132,10 +132,12 @@ static const struct button_mapping button_context_list[]  = {
 }; /* button_context_list */
 
 static const struct button_mapping button_context_tree[]  = {
-    { ACTION_TREE_WPS,    BUTTON_HOME|BUTTON_REPEAT,    BUTTON_HOME },
+//    { ACTION_TREE_WPS,    BUTTON_HOME|BUTTON_REPEAT,    BUTTON_HOME },
+    { ACTION_TREE_WPS,    BUTTON_HOME|BUTTON_REL,       BUTTON_NONE },
     { ACTION_TREE_STOP,   BUTTON_POWER|BUTTON_REL,      BUTTON_POWER },
 #ifdef HAVE_HOTKEY
-    { ACTION_TREE_HOTKEY, BUTTON_HOME|BUTTON_SELECT,    BUTTON_NONE },
+//    { ACTION_TREE_HOTKEY, BUTTON_HOME|BUTTON_SELECT,    BUTTON_NONE },
+    { ACTION_TREE_HOTKEY, BUTTON_HOME|BUTTON_REPEAT,    BUTTON_HOME },
 #endif
 
     LAST_ITEM_IN_LIST__NEXTLIST(CONTEXT_LIST),
