@@ -6,6 +6,7 @@
 
 /*LE write function from rockbox, scramble.c Copyright (C) 2002 by Bjørn
    Stenberg GPL*/
+#include <inttypes.h>
 #include "btree.h"
 
 typedef enum {left = -1,right = 1} position_t;
@@ -335,7 +336,7 @@ static void print_single_node(btree *btree, bt_node * node)
               (char*)(node->key_vals[i]->key+sizeof(int16_t)),node->level);
         i++;
     }
-    print("} (0x%x,%d) ", (unsigned int)node,node->leaf);
+    print("} (0x%" PRIxPTR ",%d) ", (uintptr_t)node,node->leaf);
 }
 
 /**

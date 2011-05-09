@@ -17,6 +17,7 @@
  *
  ****************************************************************************/
 #include <string.h>
+#include <inttypes.h>
 #include "../shared/utf8_aux.h"
 #include "btree.h"
 
@@ -218,14 +219,16 @@ int main(int argc,char * argv[])
             fread(finlne,sizeof(char),fkeylen,rfd);
             if((*(uint32_t*)&elmhdr[0])-fkeylen>0)
             {
-                printf("MXLADJf %s,%d,skip %d\n",finlne,*(uint32_t*)&elmhdr[0],(*((uint32_t*)&elmhdr[0]))-fkeylen);
+                printf("MXLADJf %s,%d,skip %" PRIuFAST16 "\n",
+                       finlne,*(uint32_t*)&elmhdr[0],(*((uint32_t*)&elmhdr[0]))-fkeylen);
                 fseek(rfd,(*((uint32_t*)&elmhdr[0]))-fkeylen,SEEK_CUR);
             }
 
             fread(tinlne,sizeof(char),tkeylen,rfd);
             if((*(uint32_t*)&elmhdr[4])-tkeylen>0)
             {
-                printf("MXLADJt %s,%d,skip %d\n",tinlne,*(uint32_t*)&elmhdr[4],(*((uint32_t*)&elmhdr[4]))-tkeylen);
+                printf("MXLADJt %s,%d,skip %" PRIuFAST16 "\n",
+                       tinlne,*(uint32_t*)&elmhdr[4],(*((uint32_t*)&elmhdr[4]))-tkeylen);
                 fseek(rfd,(*((uint32_t*)&elmhdr[4]))-tkeylen,SEEK_CUR);
             }
 
@@ -233,7 +236,8 @@ int main(int argc,char * argv[])
             tinlne[tkeylen]=0;
             if(strlen(finlne)!=(fkeylen)||strlen(tinlne)!=(tkeylen))
             {
-                printf("Bad keylen: %s,%s,%d=%d,%d=%d\n",finlne,tinlne,strlen(finlne),(fkeylen),strlen(tinlne),(tkeylen));
+                printf("Bad keylen: %s,%s,%zd=%" PRIuFAST16 ",%zd=%" PRIuFAST16 "\n",
+                       finlne,tinlne,strlen(finlne),(fkeylen),strlen(tinlne),(tkeylen));
                 continue;
             }
 
